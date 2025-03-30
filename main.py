@@ -1,5 +1,5 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 import time
 from dotenv import load_dotenv
 import os
@@ -37,7 +37,6 @@ def gen_response(chat, prompt):
                 time.sleep(0.001)
 # Store chat history
 def main():
-    configure()
     api_key = st.secrets["api_key"]
     client = genai.Client(api_key=api_key)
     chat = client.chats.create(model="gemini-2.0-flash")
