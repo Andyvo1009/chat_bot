@@ -38,7 +38,8 @@ def gen_response(chat, prompt):
 # Store chat history
 def main():
     configure()
-    client = genai.Client(api_key=os.getenv('api_key'))
+    api_key = st.secrets["api_key"]
+    client = genai.Client(api_key=api_key)
     chat = client.chats.create(model="gemini-2.0-flash")
     if "messages" not in st.session_state:
         st.session_state.messages = []
