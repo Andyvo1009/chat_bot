@@ -22,18 +22,13 @@ def gen_response(chat, prompt):
     parts = re.split(r"(```.*?```)", response, flags=re.DOTALL)
 
     for part in parts:
-        if part.startswith("```") and part.endswith("```"):
-            # Remove the triple backticks and optional language tag
-            code_content = part.strip("```").lstrip("\n")
-            st.markdown(code_content)
-        else:
-            # Typing effect for text sections
-            output = ""
-            md_box = st.empty()
-            for char in part:
-                output += char
-                md_box.markdown(output)
-                time.sleep(0.001)
+        # Typing effect for text sections
+        output = ""
+        md_box = st.empty()
+        for char in part:
+            output += char
+            md_box.markdown(output)
+            time.sleep(0.001)
 # Store chat history
 def main():
     api_key = st.secrets["api_key"]
