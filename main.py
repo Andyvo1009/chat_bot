@@ -1,16 +1,15 @@
 import streamlit as st
 import google.generativeai as genai
 import time
-from dotenv import load_dotenv
-import os
+
+
 import re
 # Title and subtitle
 st.set_page_config(page_title="My Chatbot", layout="centered")
 st.title("Hi! I'm your assistant")
 st.caption("Ask me anything and I'll try my best to help!")
 
-def configure():
-    load_dotenv()
+
 
 
 
