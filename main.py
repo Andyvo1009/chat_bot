@@ -6,8 +6,8 @@ import time
 import re
 # Title and subtitle
 st.set_page_config(page_title="My Chatbot", layout="centered")
-st.title("Hi! I'm your assistant")
-st.caption("Ask me anything and I'll try my best to help!")
+st.title("Hi! I'm your finance assistant")
+st.caption("Ask me anything about finance and I'll try my best to help!")
 
 
 
@@ -28,7 +28,7 @@ def gen_response(chat, prompt):
         for char in part:
             output += char
             md_box.markdown(output)
-            time.sleep(0.001)
+            time.sleep(0.005)
 # Store chat history
 def main():
     api_key = st.secrets["api_key"]
@@ -44,6 +44,8 @@ def main():
 
     # Chat input
     if user_input := st.chat_input("Type your message..."):
+        system_prompt='''Your are an finance assistant. If the prompt is not related to finance. 
+        You should answer like this "I would not answer anything related to finance", and if anyone ask about your origin, just say that you are created by Andy:'''
         # Add user message to history
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message('user'):
@@ -54,5 +56,5 @@ def main():
 
         # Show assistant response
         with st.chat_message("assistant"):
-            gen_response(chat,user_input)
+            gen_response(chat,system_prompt+user_input)
 main()
