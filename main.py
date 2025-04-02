@@ -19,16 +19,16 @@ def gen_response(chat, prompt):
     st.session_state.messages.append({"role": "assistant", "content": response})
 
     # Split into text and code blocks using regex
-    parts = re.split(r"(```.*?```)", response, flags=re.DOTALL)
+    #parts = re.split(r"(```.*?```)", response, flags=re.DOTALL)
 
-    for part in parts:
+    # for part in parts:
         # Typing effect for text sections
-        output = ""
-        md_box = st.empty()
-        for char in part:
-            output += char
-            md_box.markdown(output)
-            time.sleep(0.005)
+    output = ""
+    md_box = st.empty()
+    for char in response:
+        output += char
+        md_box.markdown(output)
+        time.sleep(0.005)
 # Store chat history
 def main():
     api_key = st.secrets["api_key"]
