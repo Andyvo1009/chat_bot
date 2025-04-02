@@ -15,14 +15,11 @@ st.caption("Ask me anything about finance and I'll try my best to help!")
 
 
 def gen_response(chat, prompt):
-    response = chat.send_message(prompt).text.strip()
+    with st.status('Thinking ....'):
+        response = chat.send_message(prompt).text.strip()
     st.session_state.messages.append({"role": "assistant", "content": response})
 
-    # Split into text and code blocks using regex
-    #parts = re.split(r"(```.*?```)", response, flags=re.DOTALL)
 
-    # for part in parts:
-        # Typing effect for text sections
     output = ""
     md_box = st.empty()
     for char in response:
@@ -31,8 +28,8 @@ def gen_response(chat, prompt):
         time.sleep(0.005)
 # Store chat history
 def main():
-    api_key = st.secrets["api_key"]
-    client = genai.Client(api_key=api_key)
+    #api_key = st.secrets["api_key"]
+    client = genai.Client(api_key='AIzaSyCYwwoKOa_8nPFUu6YS6URLRR1CJgl1BH4')
     chat = client.chats.create(model="gemini-2.0-flash")
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -51,9 +48,6 @@ def main():
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message('user'):
             st.markdown(user_input)
-        # Get response from bot
-
-
 
         # Show assistant response
         with st.chat_message("assistant"):
